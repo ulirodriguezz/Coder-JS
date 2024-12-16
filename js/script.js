@@ -75,12 +75,15 @@ function chequearCredenciales (nombreUsuario, password){
 function manejarOpciones(opcion){
 
     switch(opcion){
-        case 1: alert(verProductos());break;
+        case 1: 
+            let listadoProductos = verProductos();
+            alert(listadoProductos);break;
         case 2: 
-        let informe = opcionCarrito()
-        alert(informe);
-        break;
-        case 3: alert("Gracias por comprar!!");return false;
+            let informe = opcionCarrito();
+            alert(informe);break;
+        case 3: 
+            alert("Gracias por comprar!!");
+            return false;
         default :alert("Opcion invalida");
     }
     return true;
@@ -132,11 +135,11 @@ function mostrarCarrito(){
     let finMsj ="--------------------------------\n";
 
     if(carrito.length === 0){
-        msj = msj + "        No hay productos\n"+finMsj;
+        msj = msj + "        No hay productos\n" + finMsj;
         return msj;
     }
     for(const producto of carrito){
-        msj = msj + productoAString(producto)+"Cantidad: "+producto.cantidad+"\n";
+        msj = msj + productoAString(producto) + "Cantidad: " + producto.cantidad+"\n";
     }
     return msj + finMsj;
 }
@@ -147,15 +150,15 @@ function informeCarrito(){
     let finMsj = "------------------------------------";
 
     if(carrito.length === 0){
-        msj = msj + "    Monto total: $"+montoTotal;
+        msj = msj + "    Monto total: $" + montoTotal;
     }
     else{
         for(const producto of carrito){
             montoTotal += (producto.precio * (1-producto.descuento)) * producto.cantidad;
         }
-        msj = msj + "    Monto total: $"+montoTotal;
+        msj = msj + "    Monto total: $" + montoTotal;
     }
-    return msj +"\n"+finMsj;
+    return msj + "\n" + finMsj;
 
 }
 
