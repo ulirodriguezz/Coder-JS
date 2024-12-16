@@ -116,10 +116,14 @@ function opcionCarrito(){
                 }
                 break;
             case 2: 
-                // Eliminar un producto por ID
+                // Eliminar un producto por ID (Si la cantidad es mayor de uno se eliminan todos)
                 let idAEliminar = parseInt(prompt(mostrarCarrito() + "Ingrese el ID del producto que desea eliminar del carrito:"));
                 let indiceProducto = carrito.findIndex(prod => prod.id === idAEliminar)
-                carrito.splice(indiceProducto, 1);
+                if(indiceProducto !== -1){
+                    carrito.splice(indiceProducto, 1);
+                }else{
+                    alert("El producto no se encuentra en el carrito");
+                }
                 break;
             case 3:break;
             default: alert("Opcion invalida");
