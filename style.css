@@ -1,0 +1,32 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    text-align: center;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#div-principal{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border: 2px black;
+    padding: 4px;
+}
+#login-button{
+    margin-top: 5px;
+    background-color: rgb(146, 104, 185);
+    border-radius: 5px;
+    font-weight: bold;
+    height: 25px;
+}
+.error-text{
+    display:none;
+    color: red;
+}
