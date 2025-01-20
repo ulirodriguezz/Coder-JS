@@ -4,14 +4,16 @@ const registeredUsers = [
         password : "admin"
     }
 ]
-localStorage.setItem("registeredUser",JSON.stringify(registeredUsers));
+localStorage.setItem("registeredUsers",JSON.stringify(registeredUsers));
 
 let usernameField = document.getElementById("input-username");
 let passawordField = document.getElementById("input-password");
 let loginButton = document.getElementById("login-button")
 loginButton.onclick = () => {
     let validCredentials = false;
-    for(user of registeredUsers){
+    let users = localStorage.getItem("registeredUsers");
+    users = JSON.parse(users);
+    for(user of users){
         if(usernameField.value == user.username && passawordField.value == user.password){
             validCredentials = true;
         }

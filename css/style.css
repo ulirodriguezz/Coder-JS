@@ -14,6 +14,9 @@ form{
 }
 header{
     display: flex;
+    border-bottom: 2px solid grey;
+    width: 100%;
+    justify-content: center;
 }
 #div-principal{
     display: flex;
@@ -59,6 +62,7 @@ header{
     text-decoration: none;
     color: black;
     text-align: center;
+    width: 138px;
 }
 .nav-button:hover{
     transform: scale(1.1);
@@ -78,8 +82,26 @@ header{
     display: flex;
     flex-wrap: wrap;
 }
+#cart-container h2{
+    text-align: center;
+}
 #sidebar-cart{
     width: 10%;
+}
+#empty-button{
+    width: 152px;
+    color: black;
+    background-color: rgb(231, 121, 121);
+    border: 2px solid black;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 13.5px;
+    transition: 0.5s;
+    margin-top: 7px;
+}
+#empty-button:hover{
+    transform: scale(1.1);
 }
 .product-card{
     background-color: rgb(242, 238, 229);

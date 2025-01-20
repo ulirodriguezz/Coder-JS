@@ -2,10 +2,16 @@ let cart=[];
 function initializeCart(){
     cart = localStorage.getItem("cartDB");
     cart = JSON.parse(cart);
-
+    let emptyCartButton = document.getElementById("empty-button");
     if(cart == null){
         cart = [];
     }
+    emptyCartButton.onclick=()=>{
+        cart = [];
+        localStorage.setItem("cartDB",JSON.stringify(cart));
+        renderCart(cart);
+    }
+
 }
 function renderCart(cart){
     let cartContainer = document.getElementById("cart-container");
@@ -22,6 +28,7 @@ function renderCart(cart){
         let totalProductPrice = p.quantity * p.price *(1-p.discount);
         productCard.className="cart-product-card";
         productCard.id =`porduct-card-${p.id}`;
+        //Aclaración: Necesito que el ID de los botones sea unico por lo que no puedo poner directamente el ID del producto.
         productCard.innerHTML = `
         <h2>${p.name}</h1>
                 <h3 id="text-quantity">Cantidad : ${p.quantity}</h3>
@@ -29,11 +36,10 @@ function renderCart(cart){
                     <button class="minus-button" id=${"minus-"+p.id}>-</button>
                     <button class="plus-button" id=${"plus-"+p.id}>+</button>
                 </div>
-                <h3>Total: $${totalProductPrice}</h3>
+                <h3>Total: $${totalProductPrice.toFixed(2)}</h3>
             </div>
         `
-        cartTotalPriceCount += totalProductPrice;
-        //Necesito que el ID de los botones sea unico por lo que no puedo poner directamente el ID del producto.
+        cartTotalPriceCount += totalProductPrice;   
         cartContainer.appendChild(productCard);
     });
     cartTotalPrice.innerText ="Total price: $"+cartTotalPriceCount;
