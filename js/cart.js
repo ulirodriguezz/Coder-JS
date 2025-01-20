@@ -39,7 +39,7 @@ function renderCart(cart){
                 <h3>Total: $${totalProductPrice.toFixed(2)}</h3>
             </div>
         `
-        cartTotalPriceCount += totalProductPrice;   
+        cartTotalPriceCount += totalProductPrice;   //Poría usar el reduce para esto pero decdí aprovechar que ya tenía el foreach.
         cartContainer.appendChild(productCard);
     });
     cartTotalPrice.innerText ="Total price: $"+cartTotalPriceCount;

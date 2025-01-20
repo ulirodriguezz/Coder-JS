@@ -39,12 +39,20 @@ header{
     flex-direction: row;
     align-items: normal;
     justify-content: flex-start;
-    width: 90%;
+    width: 80%;
     flex-wrap: wrap;
 }
 #section-ecommerce{
     display: flex;
-    width: 70%;
+    width: 85%;
+}
+#sidebar-search{
+    width: 15%;
+    margin-right: 20px;
+}
+#sidebar-search input{
+    margin-top: 10px;
+    width: 100%;
 }
 #sidebar-ecommerce{
     width: 10%;

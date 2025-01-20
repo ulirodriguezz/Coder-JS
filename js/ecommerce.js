@@ -45,15 +45,22 @@ const productsDB = [
 let cart = [];
 function startEcommerce(){
     let cartDB = localStorage.getItem("cartDB");
+    let searchBar = document.getElementById("search-bar");
     cartDB = JSON.parse(cartDB);
     console.log("Carrito:"+cart);
     if(cartDB == null){
         console.log("Holaa");
         localStorage.setItem("cartDB",JSON.stringify(cart));
     }
+    searchBar.onkeyup = () => {
+        let filteredProducts = productsDB.filter(p => p.name.toLocaleLowerCase().includes(searchBar.value))
+        renderProducts(filteredProducts);
+    }
+
 }
 function renderProducts(products){
     let productContainer = document.getElementById("product-container");
+    productContainer.innerHTML = "";
     for(p of products){
         let product = document.createElement("div");   
         product.className = "product-card";   
