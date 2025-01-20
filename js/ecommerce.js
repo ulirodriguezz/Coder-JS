@@ -47,9 +47,7 @@ function startEcommerce(){
     let cartDB = localStorage.getItem("cartDB");
     let searchBar = document.getElementById("search-bar");
     cartDB = JSON.parse(cartDB);
-    console.log("Carrito:"+cart);
     if(cartDB == null){
-        console.log("Holaa");
         localStorage.setItem("cartDB",JSON.stringify(cart));
     }
     searchBar.onkeyup = () => {
@@ -82,11 +80,13 @@ function addButtonEvents(){
         button.onclick = (e) => {
             const prodID = e.currentTarget.id;
             let product = productsDB.find(p => p.id == prodID);
+            //Este metodo no estaba en las clases pero como es el mismo concepto que el find/filter supuse que podemos usarlo
             if(!cart.some(p => p.id == prodID)){
                 product.quantity = 1;
                 cart.push(product);
             }else{
-                //Este metodo no estaba en las clases pero como es el mismo concepto supuse que podemos usarlo
+               
+                //IDEM comentario de arriba
                 let index = cart.findIndex(p => p.id == prodID);
                 cart[index].quantity += 1;
             }
@@ -98,7 +98,6 @@ function addButtonEvents(){
 
 startEcommerce();
 renderProducts(productsDB);
-console.log(cart);
 
 
 

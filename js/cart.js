@@ -69,7 +69,6 @@ function addButtonEvents(){
         b.onclick = (e) => {
            //Tengo que usar el ID unico de cada boton por lo cual quito la parte de "plus-" para quedarme solo con el ID del producto
            let prodID = e.currentTarget.id.substring(5, 6);
-           console.log(prodID)
            let index = cart.findIndex(p => p.id == prodID);
            cart[index].quantity += 1;         
            localStorage.setItem("cartDB",JSON.stringify(cart));
