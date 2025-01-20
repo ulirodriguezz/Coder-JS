@@ -17,7 +17,7 @@ loginButton.onclick = () => {
         }
     }
     if(validCredentials){
-        window.location.href = "./ecommerce.html";
+        window.location.href = "./html/ecommerce.html";
     }else{
         let errorMsg = document.getElementById("error-text-login");
         errorMsg.style.display = "block";
