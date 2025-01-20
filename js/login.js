@@ -13,8 +13,9 @@ loginButton.onclick = () => {
     let validCredentials = false;
     let users = localStorage.getItem("registeredUsers");
     users = JSON.parse(users);
-    for(user of users){
-        if(usernameField.value == user.username && passawordField.value == user.password){
+    let userCredentials = users.find(usr => usr.username == usernameField.value);
+    if(userCredentials !== undefined){
+        if(passawordField.value == userCredentials.password){
             validCredentials = true;
         }
     }
