@@ -1,0 +1,27 @@
+[
+    {
+        "id" : 1,
+        "name" : "Campera roja",
+        "price" : 100,
+        "discount" : 0.1
+    },
+    {
+        "id" : 2,
+        "name" : "Ojotas Negras",
+        "price" : 20,
+        "discount" : 0.2
+    },
+    {
+        "id" : 3,
+        "name" : "Remera verde",
+        "price" : 60,
+        "discount" : 0.15
+    },
+    {
+        "id" : 4,
+        "name" : "Camiseta River",
+        "price" : 120,
+        "discount" : 0.1
+    }
+   
+]

@@ -1,4 +1,20 @@
+
 let cart=[];
+const productDeleteAlert = (index) =>{
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: 'Se eliminará el producto: "'+cart[index].name+'" de tu carrito',
+        icon: 'warning',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText:'Cancelar',
+        showCancelButton:true,
+        preConfirm: () => {
+            cart.splice(index, 1);
+            renderCart(cart);
+            localStorage.setItem("cartDB",JSON.stringify(cart));
+        }
+      });
+}
 function initializeCart(){
     cart = localStorage.getItem("cartDB");
     cart = JSON.parse(cart);
@@ -7,9 +23,23 @@ function initializeCart(){
         cart = [];
     }
     emptyCartButton.onclick=()=>{
-        cart = [];
+        Swal.fire({
+            title: '¿Estas seguro?',
+            text: 'Todos los productos de tu carrito seran eliminados',
+            icon: 'warning',
+            confirmButtonText: 'Aceptar',
+            cancelButtonText:'Cancelar',
+            showCancelButton:true,
+          })
+          .then(result => {
+            if(result.isConfirmed){
+                cart = [];
+                localStorage.setItem("cartDB",JSON.stringify(cart));
+                renderCart(cart);
+            }
+          })
         localStorage.setItem("cartDB",JSON.stringify(cart));
-        renderCart(cart);
+
     }
 
 }
@@ -35,6 +65,9 @@ function renderCart(cart){
                 <div class="cart-buttons-container">
                     <button class="minus-button" id=${"minus-"+p.id}>-</button>
                     <button class="plus-button" id=${"plus-"+p.id}>+</button>
+                    <button class="delete-button" id= ${"delete-"+p.id}>
+                        <i class="fas fa-trash-alt"></i> 
+                    </button>
                 </div>
                 <h3>Total: $${totalProductPrice.toFixed(2)}</h3>
             </div>
@@ -48,35 +81,41 @@ function renderCart(cart){
 function addButtonEvents(){
     let minusButtons = document.querySelectorAll(".minus-button");
     let plusButtons = document.querySelectorAll(".plus-button");
+    let deleteButtons = document.querySelectorAll(".delete-button");
     minusButtons.forEach(b => {
         //Seteo el evento para los botones que reducen la cantidad de unidades
         b.onclick = (e) => {
            //Tengo que usar el ID unico de cada boton por lo cual quito la parte de "minus-" para quedarme solo con el ID del producto
-           let prodID = e.currentTarget.id.substring(6, 7);
+           let prodID = e.currentTarget.id.substring(6);
            let index = cart.findIndex(p => p.id == prodID);
            if(cart[index].quantity == 1){
-            cart.splice(index, 1);
+            productDeleteAlert(index);
            }
            else{
             cart[index].quantity -= 1;
+            renderCart(cart);
+            localStorage.setItem("cartDB",JSON.stringify(cart));
            }
-           localStorage.setItem("cartDB",JSON.stringify(cart));
-           renderCart(cart);
         }
     })
     plusButtons.forEach(b => {
         //Seteo el evento para los botones que reducen la cantidad de unidades
         b.onclick = (e) => {
            //Tengo que usar el ID unico de cada boton por lo cual quito la parte de "plus-" para quedarme solo con el ID del producto
-           let prodID = e.currentTarget.id.substring(5, 6);
+           let prodID = e.currentTarget.id.substring(5);
            let index = cart.findIndex(p => p.id == prodID);
            cart[index].quantity += 1;         
            localStorage.setItem("cartDB",JSON.stringify(cart));
            renderCart(cart);
         }
     })
+    deleteButtons.forEach(b => {
+    b.onclick = (e) => {
+        let prodID = e.currentTarget.id.substring(7);
+        let index = cart.findIndex(p => p.id == prodID);
+        productDeleteAlert(index);
+    }
+    })
 }
-//  cart = [];
-//  localStorage.setItem("cartDB",JSON.stringify(cart));
 initializeCart();
 renderCart(cart);

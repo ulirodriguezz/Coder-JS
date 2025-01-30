@@ -166,5 +166,12 @@ header{
     text-align: center;
     padding: 0px;
     margin: 0px;
-
+    margin-right: 3px;
+}
+.delete-button{
+    height: 50%;    
+    width: 40px;  
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
 }

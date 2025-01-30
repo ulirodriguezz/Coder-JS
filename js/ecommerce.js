@@ -1,48 +1,14 @@
-const productsDB = [
+
+let productsLoaded = false;
+const productAlert = () => {Swal.fire(
     {
-        id : 1,
-        name : "Campera roja",
-        price : 100,
-        discount : 0.1
-    },
-    {
-        id : 2,
-        name : "Ojotas negras",
-        price : 20,
-        discount : 0.25
-    },
-    {
-        id : 3,
-        name : "Remera verda",
-        price : 60,
-        discount : 0.12
-    },
-    {
-        id : 4,
-        name : "Pantalon azul",
-        price : 70,
-        discount : 0.1
-    },
-    {
-        id : 5,
-        name : "Camiseta River",
-        price : 200,
-        discount : 0.09
-    },
-    {
-        id : 6,
-        name : "Camiseta Boca",
-        price : 200,
-        discount : 0.12
-    },
-    {
-        id : 7,
-        name : "Camiseta Racing",
-        price : 150,
-        discount : 0.18
-    },
-];
-let cart = [];
+        title: 'Perfecto!',
+        text: 'El producto se agregó a tu carrito',
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+    }
+)};
+let productsDB;
 function startEcommerce(){
     let cartDB = localStorage.getItem("cartDB");
     let searchBar = document.getElementById("search-bar");
@@ -51,15 +17,18 @@ function startEcommerce(){
         localStorage.setItem("cartDB",JSON.stringify(cart));
     }
     searchBar.onkeyup = () => {
-        let filteredProducts = productsDB.filter(p => p.name.toLocaleLowerCase().includes(searchBar.value))
-        renderProducts(filteredProducts);
+        if(productsLoaded){
+            let filteredProducts = productsDB.filter(p => p.name.toLocaleLowerCase().includes(searchBar.value))
+            renderProducts(filteredProducts);
+        }
     }
 
 }
 function renderProducts(products){
+
     let productContainer = document.getElementById("product-container");
     productContainer.innerHTML = "";
-    for(p of products){
+    for(p of productsDB){
         let product = document.createElement("div");   
         product.className = "product-card";   
         product.innerHTML =`
@@ -70,6 +39,8 @@ function renderProducts(products){
         productContainer.appendChild(product);
     }
     addButtonEvents();
+
+    
 
 }
 function addButtonEvents(){
@@ -84,11 +55,13 @@ function addButtonEvents(){
             if(!cart.some(p => p.id == prodID)){
                 product.quantity = 1;
                 cart.push(product);
+                productAlert();
             }else{
                
                 //IDEM comentario de arriba
                 let index = cart.findIndex(p => p.id == prodID);
                 cart[index].quantity += 1;
+                productAlert();
             }
             localStorage.setItem("cartDB",JSON.stringify(cart));
         }
@@ -96,8 +69,17 @@ function addButtonEvents(){
     });
 }
 
+fetch("../db/products.json")
+    .then(response => response.json())
+    .then(data => {    
+    productsLoaded = true;
+    productsDB = data;
+    renderProducts(productsDB);
+    })
 startEcommerce();
-renderProducts(productsDB);
+
+    
+
 
 
 
