@@ -3,25 +3,29 @@
         "id" : 1,
         "name" : "Campera roja",
         "price" : 100,
-        "discount" : 0.1
+        "discount" : 0.1,
+        "imgURL":"https://freepngimg.com/save/149577-jacket-casual-red-png-free-photo/800x800"
     },
     {
         "id" : 2,
         "name" : "Ojotas Negras",
         "price" : 20,
-        "discount" : 0.2
+        "discount" : 0.2,
+        "imgURL":"https://www.brancastore.com.ar/821-producto_1280x1280/combo-ojotas-summer-branca.jpg"
     },
     {
         "id" : 3,
         "name" : "Remera verde",
         "price" : 60,
-        "discount" : 0.15
+        "discount" : 0.15,
+        "imgURL":"https://static.vecteezy.com/system/resources/previews/035/200/525/non_2x/ai-generated-tshirt-isolated-on-transparent-background-free-png.png"
     },
     {
         "id" : 4,
         "name" : "Camiseta River",
         "price" : 120,
-        "discount" : 0.1
+        "discount" : 0.1,
+        "imgURL":"https://tiendariver.vtexassets.com/arquivos/ids/171862/IX5097_F.png?v=638604464350370000"
     }
    
 ]

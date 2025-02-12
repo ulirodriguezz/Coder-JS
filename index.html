@@ -6,20 +6,24 @@
     <!-- JS -->
     <script defer src="./js/login.js"></script>
     <!-- Fin JS -->
-     <!-- CSS -->
-      <link rel="stylesheet" href="./css/style.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
     <title>Entega 2</title>
 </head>
 <body>
-    <div id="div-principal">
+    <div id="login-card">
         <h1>Login</h1>
         <label for="username">Nombre de usuario: </label>
         <input name="username" id="input-username" type="text" placeholder="ulises">
         <label for="password">Nombre de usuario: </label>
         <input name="password" id="input-password" type="password" placeholder="admin">
         <button id="login-button">Iniciar sesion</button>
-        <p class="error-text" id="error-text-login">Credenciales invalidas (Usr: ulises, psw: admin)</p>
+        <p class="error-text" id="error-text-login">(Usr: ulises, psw: admin)</p>
 
     </div>
+    <!-- Tostify Script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 </html>

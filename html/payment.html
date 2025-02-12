@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script defer src="../js/payment.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Información de pago</h1>
+    </header>
+    <section id="payment-section">
+        <div id="creditcard-info-card">
+            <form>
+                <h2>Datos de la tarjeta</h2>
+                <label for="card-number">Numero de tarjeta:</label>
+                <input type="number" name="card-number" id="card-number-input">
+                <label for="card-owner">Nombre del titular:</label>
+                <input type="text" name="card-owner" id="card-owner-input">
+                <div>
+                    <div id="card-date-container">
+                        <label for="card-exp-date">Vto:</label>
+                        <input type="month" name="card-exp-date" id="card-exp-date" class="short-input">
+                    </div>
+                    <div id="ccv-container">
+                        <label for="card-cvv-number">CVC:</label>
+                        <input type="number" name="card-cvv-number" id="card-cvv-number">
+                    </div>
+                </div>
+                <h2>Datos de envío</h2>
+                <label for="address">Dirección:</label>
+                <input type="text" name="address" id="address" placeholder="Suipacha 2355">
+                <label for="address-inbetween">Entre calles:</label>
+                <input type="text" name="address-inbetween" id="address-inbetween" placeholder="Cramer y Olazabal">
+                <label for="zip-code">Codigo postal:</label>
+                <input type="number" name="zip-code" id="zip-code" placeholder="1431">
+                <button type="button" id="confirm-payment-button">Confirmar</button>
+            </form>
+        </div>
+    </section>
+<!-- Tostify Script -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+</html>

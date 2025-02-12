@@ -19,6 +19,7 @@ function initializeCart(){
     cart = localStorage.getItem("cartDB");
     cart = JSON.parse(cart);
     let emptyCartButton = document.getElementById("empty-button");
+    let cartConfirmButton = document.getElementById("confirm-cart-button");
     if(cart == null){
         cart = [];
     }
@@ -41,6 +42,52 @@ function initializeCart(){
         localStorage.setItem("cartDB",JSON.stringify(cart));
 
     }
+    cartConfirmButton.onclick = () =>{
+        if(cart.length == 0){
+            Swal.fire({
+                icon: 'warning',
+                title: 'No tenés productos',
+                text: 'Agregá productos a tu carrito para realizar la compra',
+                showCancelButton:false,
+                confirmButtonText: 'Ir al ecommerce',
+            })
+            .then(result => {
+                if(result.isConfirmed){
+                    window.location.href = "../html/ecommerce.html";
+                }
+            })
+        }
+        else{
+            Swal.fire({
+                title: '¿Queres confirmar tu compra?',
+                text: 'Se realizará el cobro de todos los elementos del carrito y se creará un pedido',
+                icon: 'warning',
+                confirmButtonText: 'Confirmar',
+                cancelButtonText:'Cancelar',
+                showCancelButton:true,
+              })
+              .then(
+                result =>  {
+                    if(result.isConfirmed){
+                        // Acá iría la logica para realizar la compra,
+                        //hacer el pago, impactar el stock, generar el pedido, etc
+                        //(No forma parte de este simulador)
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Ya casi es tuyo!',
+                            text: 'Tu carrito fue confirmado, completá tu información de pago para concretar la compra',
+                            showCancelButton:false,
+                            confirmButtonText: 'Ir al pago',
+                        })
+                        .then(result =>{
+                            window.location.href = "../html/payment.html";
+                        })
+                    }
+                }
+              )
+        }
+        
+    }
 
 }
 function renderCart(cart){
@@ -60,22 +107,27 @@ function renderCart(cart){
         productCard.id =`porduct-card-${p.id}`;
         //Aclaración: Necesito que el ID de los botones sea unico por lo que no puedo poner directamente el ID del producto.
         productCard.innerHTML = `
-        <h2>${p.name}</h1>
-                <h3 id="text-quantity">Cantidad : ${p.quantity}</h3>
-                <div class="cart-buttons-container">
-                    <button class="minus-button" id=${"minus-"+p.id}>-</button>
-                    <button class="plus-button" id=${"plus-"+p.id}>+</button>
-                    <button class="delete-button" id= ${"delete-"+p.id}>
-                        <i class="fas fa-trash-alt"></i> 
-                    </button>
+                <h2>${p.name}</h1>
+                <div class="product-card-content">
+                    <img src=${p.imgURL} alt="Foto producto">
+                    <div class = "product-cart-info">
+                        <h3 id="text-quantity">Cantidad : ${p.quantity}</h3>
+                        <div class="cart-buttons-container">
+                            <button class="minus-button" id=${"minus-"+p.id}>-</button>
+                            <button class="plus-button" id=${"plus-"+p.id}>+</button>
+                            <button class="delete-button" id= ${"delete-"+p.id}>
+                                <i class="fas fa-trash-alt"></i> 
+                            </button>
+                        </div>
+                        <h3>Total: $${totalProductPrice.toFixed(2)}</h3>
+                    </div>
                 </div>
-                <h3>Total: $${totalProductPrice.toFixed(2)}</h3>
             </div>
         `
         cartTotalPriceCount += totalProductPrice;   //Poría usar el reduce para esto pero decdí aprovechar que ya tenía el foreach.
         cartContainer.appendChild(productCard);
     });
-    cartTotalPrice.innerText ="Total price: $"+cartTotalPriceCount;
+    cartTotalPrice.innerText ="Total carrito: \n $"+cartTotalPriceCount;
     addButtonEvents();
 }
 function addButtonEvents(){

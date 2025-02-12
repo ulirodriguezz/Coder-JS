@@ -3,6 +3,10 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #292C3E;
+}
+h1,h2,h3,h4,p,label{
+    color: white;
 }
 h1{
     text-align: center;
@@ -18,7 +22,14 @@ header{
     width: 100%;
     justify-content: center;
 }
-#div-principal{
+input{
+    background-color:#292C3E; 
+    border: none;
+    height: 30px;
+    color: white;
+}
+#login-card{
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -26,14 +37,17 @@ header{
     border-radius: 10px;
     padding: 10px;
     padding-bottom: 50px;
+    background-color: #202334;
 }
 #login-button{
     margin-top: 20px;
     background-color: rgb(146, 104, 185);
+    border:  rgb(146, 104, 185);
     border-radius: 5px;
     font-weight: bold;
     height: 25px;
 }
+
 #product-container{
     display: flex;
     flex-direction: row;
@@ -53,28 +67,15 @@ header{
 #sidebar-search input{
     margin-top: 10px;
     width: 100%;
+    background-color: #202334;
+    border-radius:7px;
+    padding-left: 10px;
 }
 #sidebar-ecommerce{
     width: 10%;
 }
-.nav-button{
-    display: block;
-    margin-top: 10px;
-    background-color: rgb(115, 185, 104);
-    border: 2px solid black;
-    border-radius: 5px;
-    font-weight: bold;
-    padding: 5px;
-    font-size: 13.5px;
-    transition: 0.5s;
-    text-decoration: none;
-    color: black;
-    text-align: center;
-    width: 138px;
-}
-.nav-button:hover{
-    transform: scale(1.1);
-}
+
+
 #text-quantity{
     margin-bottom: 5px;
 }
@@ -100,7 +101,7 @@ header{
     width: 152px;
     color: black;
     background-color: rgb(231, 121, 121);
-    border: 2px solid black;
+    border: none;
     border-radius: 5px;
     font-weight: bold;
     padding: 5px;
@@ -111,18 +112,64 @@ header{
 #empty-button:hover{
     transform: scale(1.1);
 }
+#confirm-cart-button{
+    width: 152px;
+    background-color: rgb(146, 104, 185);
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 13.5px;
+    font-weight: bold;
+    transition: 0.5s;
+    margin-top: 7px;
+}
+#confirm-cart-button:hover{
+    transform: scale(1.1);
+}
+.nav-button{
+    display: block;
+    margin-top: 10px;
+    background-color: #655CC9;
+    border: none;   
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 13.5px;
+    transition: 0.5s;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    width: 142px;
+}
+.nav-button:hover{
+    transform: scale(1.1);
+}
 .product-card{
+    display: flex;
+    flex-direction: column;
     background-color: rgb(242, 238, 229);
     border: 2px solid black;    
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
     width: 20%;
+    align-items: center;
+    background-color: #202334;
+}
+.product-card img{
+    width:120px;
+}
+.product-card div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 .product-button{
     height: 30px;
     background-color: rgb(187, 150, 222);
     border-radius: 5px;
+    border: none;
     transition: 0.5s;
 }
 .product-button:hover{
@@ -135,22 +182,54 @@ header{
     color: red;
 }
 .cart-product-card{
-    background-color: rgb(242, 238, 229);
+    display: flex;
+    flex-direction: column;
+    background-color: #202334;
     border: 2px solid black;    
     border-radius: 10px;
-    padding: 10px;
+    padding: 0px;
     margin: 10px;
-    width: 20%;
+    width: 25%;
+    height: auto;
 }
 .cart-product-card h2{
     font-size: 23px;
     font-weight: bold;
+    margin: 0px;
+    border-bottom: 2px solid rgb(9, 8, 8);
+
+    padding: 5px;
+}
+.product-card-content{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    align-items: center;
+    
+}
+.cart-product-card img{
+    width: 90px;
+    width: 30%;
+}
+.product-cart-info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    width: 70%;
+    align-items: flex-start;
+    padding-left: 20px;
+}
+.product-cart-info h3{
+    margin-top: 5px;
+    font-size: 17px;
 }
 .cart-buttons-container{
     display: flex;
     flex-direction: row;
     align-items: center;
     margin:0px;
+    height: 40%;
 }
 .minus-button{
     height: 50%;  
@@ -159,6 +238,9 @@ header{
     padding: 0px;
     margin: 0px;
     margin-right: 3px;
+    border: none;
+    padding: 2px;
+    border-radius: 2px;
 }
 .plus-button{
     height: 50%;    
@@ -167,6 +249,13 @@ header{
     padding: 0px;
     margin: 0px;
     margin-right: 3px;
+    border: none;
+    padding: 2px;
+    border-radius: 2px;
+}
+.plus-button:hover,.minus-button:hover{
+    background-color:rgb(187, 182, 182);
+    transition: 0.3s;
 }
 .delete-button{
     height: 50%;    
@@ -174,4 +263,90 @@ header{
     text-align: center;
     padding: 0px;
     margin: 0px;
+    background-color: rgb(207, 40, 40);
+    border: none;
+    padding: 2px;
+    border-radius: 2px;
+}
+.delete-button:hover{
+    background-color:rgb(156, 17, 17);
+    transition: 0.3s;
+}
+#purchased-items-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.purchased-item{
+    display: flex;
+    align-items: center;
+    background-color: #202334;
+    border: none;
+    padding: 0px 10px 0px 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+.purchased-item img{
+    height: 40px;
+    margin: 0px 10px 0px 2px;
+}
+.purchased-item h2{
+    width: 300px;
+    text-align: center;
+    border-top: none;
+}
+.purchased-item h3{
+    margin-left: 50px;
+}
+#total-purchase-cost-txt{
+    border-top: 2px solid grey;
+    padding-top: 10px;
+}
+#creditcard-info-card{
+    margin-top: 20px;
+    background-color: #202334;
+    width: 300px;
+    padding: 20px;
+    border-radius: 20px;
+}
+#creditcard-info-card button{
+    margin-top: 10px;
+    background-color: #655CC9;
+    border: none;   
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 13.5px;
+    transition: 0.5s;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 30px;
+}
+#creditcard-info-card button:hover{
+    background-color: #4b3fd0;
+    transform: scale(1.025);
+}
+#creditcard-info-card input{
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+#creditcard-info-card div {
+    display: flex;
+    align-items: left;
+    justify-content: space-around;
+}
+#card-date-container{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+#ccv-container{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+#thankyou-h2{
+    color: #8077e8;
 }
