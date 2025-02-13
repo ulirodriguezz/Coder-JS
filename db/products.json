@@ -26,6 +26,35 @@
         "price" : 120,
         "discount" : 0.1,
         "imgURL":"https://tiendariver.vtexassets.com/arquivos/ids/171862/IX5097_F.png?v=638604464350370000"
+    },
+    {
+        "id" : 5,
+        "name" : "Remera gris",
+        "price" : 80,
+        "discount" : 0.1,
+        "imgURL":"https://static.vecteezy.com/system/resources/thumbnails/050/704/405/small/empty-blank-gray-men-s-t-shirt-isolated-on-transparent-background-png.png"
+    },
+    {
+        "id" : 6,
+        "name" : "Ojotas Adidas",
+        "price" : 40,
+        "discount" : 0.25,
+        "imgURL":"https://coppelar.vtexassets.com/arquivos/ids/1809664/R-923567-1.png?v=638349799905030000"
+    },
+    {
+        "id" : 7,
+        "name" : "Zapatillas Nike",
+        "price" : 200,
+        "discount" : 0.30,
+        "imgURL":"https://static.vecteezy.com/system/resources/previews/049/668/131/non_2x/white-running-shoes-with-orange-laces-and-transparent-background-png.png"
+    },
+    {
+        "id" : 8,
+        "name" : "Gorra Nike",
+        "price" : 100,
+        "discount" : 0.20,
+        "imgURL":"https://static.flexdog.es/flexdog-7/products/images/032783fb-d32c-42b0-aa85-a0faafe8aff5.png?width=750&quality=40"
     }
+    
    
 ]

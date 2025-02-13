@@ -25,7 +25,7 @@ loginButton.onclick = () => {
             //Verifico si ya existe algun usuario loggeado con un carrito
             //Si existe, guardo el carrito en "savedCarts" para ese usuario
             if(loggedUser != undefined && cartDB != undefined){
-                if(savedCarts == null){
+                if(savedCarts == null || savedCarts == undefined){
                     savedCarts = [];
                 }    
                 let cartIndex = savedCarts.findIndex(c => c.username == loggedUser.username);
