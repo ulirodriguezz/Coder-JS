@@ -34,12 +34,28 @@ const productAlert = (error) => {
 };
 function startEcommerce(){
     let cartDB = localStorage.getItem("cartDB");
+    cartDB = JSON.parse(cartDB);
     let searchBar = document.getElementById("search-bar");
     let logoutButton = document.getElementById("logout-button");
     logoutButton.onclick = () =>{
+        //Guardo el carrito del usuario y cierro su sesión
+        let savedCarts = localStorage.getItem("savedCarts");
+        savedCarts = JSON.parse(savedCarts);
+        let cartIndex = savedCarts.findIndex(c => c.username == loggedUser.username);
+        if(cartIndex != -1){
+            savedCarts[cartIndex].productArray = cartDB ;
+            localStorage.setItem("savedCarts",json.stringify(savedCarts));
+        }else{
+            savedCarts.push(
+                {
+                    username : loggedUser.username,
+                    productArray : cartDB
+                }
+            )
+            localStorage.setItem("savedCarts",JSON.stringify(savedCarts));
+        }
         localStorage.setItem("loggedUser",null);
     }
-    cartDB = JSON.parse(cartDB);
     if(cartDB == null){
         localStorage.setItem("cartDB",JSON.stringify(cart));
     }
