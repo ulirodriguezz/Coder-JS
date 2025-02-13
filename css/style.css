@@ -100,7 +100,7 @@ input{
 #empty-button{
     width: 152px;
     color: black;
-    background-color: rgb(231, 121, 121);
+    background-color: #dc74e2;
     border: none;
     border-radius: 5px;
     font-weight: bold;
@@ -349,4 +349,22 @@ input{
 }
 #thankyou-h2{
     color: #8077e8;
+}
+#logout-button{
+    display: block;
+    margin-top: 10px;
+    background-color: #dc74e2;
+    border: none;   
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 13.5px;
+    transition: 0.5s;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    width: 142px;
+}
+#logout-button:hover{
+    transform: scale(1.1);
 }

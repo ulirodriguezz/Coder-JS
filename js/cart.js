@@ -1,5 +1,7 @@
 
+const PURCHASE_LIMIT = 10;
 let cart=[];
+let loggedUser = localStorage.getItem("loggedUser");
 const productDeleteAlert = (index) =>{
     Swal.fire({
         title: '¿Estas seguro?',
@@ -57,6 +59,7 @@ function initializeCart(){
                 }
             })
         }
+        
         else{
             Swal.fire({
                 title: '¿Queres confirmar tu compra?',
@@ -97,7 +100,8 @@ function renderCart(cart){
     //Borro el carrito para actualizarlo
     if(cart.length == 0){
         cartContainer.innerHTML = "<h2>No hay productos en el carrito</h2>";
-    }else{
+    }
+    else{
         cartContainer.innerHTML ="";
     }
     cart.forEach(p => {
@@ -143,6 +147,7 @@ function addButtonEvents(){
            if(cart[index].quantity == 1){
             productDeleteAlert(index);
            }
+           
            else{
             cart[index].quantity -= 1;
             renderCart(cart);
@@ -156,9 +161,24 @@ function addButtonEvents(){
            //Tengo que usar el ID unico de cada boton por lo cual quito la parte de "plus-" para quedarme solo con el ID del producto
            let prodID = e.currentTarget.id.substring(5);
            let index = cart.findIndex(p => p.id == prodID);
-           cart[index].quantity += 1;         
-           localStorage.setItem("cartDB",JSON.stringify(cart));
-           renderCart(cart);
+           if(cart[index].quantity == PURCHASE_LIMIT){
+            Toastify({
+                text: `Limite de compra alcanzado`,
+                duration: 3000,
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "center", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                  background: "red",
+                },
+              }).showToast();
+           }else{
+                cart[index].quantity += 1;         
+                localStorage.setItem("cartDB",JSON.stringify(cart));
+                renderCart(cart);
+           }
+
         }
     })
     deleteButtons.forEach(b => {
@@ -169,5 +189,24 @@ function addButtonEvents(){
     }
     })
 }
-initializeCart();
-renderCart(cart);
+
+if(loggedUser != "null"){
+    initializeCart();
+    renderCart(cart);
+}
+else{
+    Swal.fire({
+        title: 'No has iniciado sesión',
+        text: 'Para comprar en el ecommerce debes iniciar sesión primero',
+        icon: 'warning',
+        confirmButtonText: 'Iniciar sesión',
+        showCancelButton:false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        preConfirm: () => {
+            //Se ejecuta al confirmar la alerta
+            window.location.href = "../index.html";
+        }
+      });
+}
+

@@ -1,4 +1,10 @@
+let loggedUser = localStorage.getItem("loggedUser");
+let productsDB;
+const PURCHASE_LIMIT = 10;
 const productAlert = (error) => {
+    //Esta funcion muestra una alerta/notificación al agregar un producto al carrito
+    //Si se pasa true, ocurrió un error y se muestra la primer notificación, caso contrario
+    //se muestra la segunda notificación
     if(error == true){
         Toastify({
             text: `Limite de compra alcanzado`,
@@ -26,11 +32,13 @@ const productAlert = (error) => {
     }
 
 };
-let loggedName;
-let productsDB;
 function startEcommerce(){
     let cartDB = localStorage.getItem("cartDB");
     let searchBar = document.getElementById("search-bar");
+    let logoutButton = document.getElementById("logout-button");
+    logoutButton.onclick = () =>{
+        localStorage.setItem("loggedUser",null);
+    }
     cartDB = JSON.parse(cartDB);
     if(cartDB == null){
         localStorage.setItem("cartDB",JSON.stringify(cart));
@@ -85,7 +93,7 @@ function addButtonEvents(){
                 //Si el producto ya fue agregado 10 veces al carrito, no permito que se agregue nuevamente
                 //Podría hacerse con un if-else pero para cumplir con el uso de try-catch lo hice por medio de un error
                 try{
-                    if(cart[index].quantity == 10){
+                    if(cart[index].quantity == PURCHASE_LIMIT){
                         throw new Error("Limite alcanzado");
                     }
                     cart[index].quantity += 1;
@@ -100,38 +108,64 @@ function addButtonEvents(){
         
     });
 }
-//Muestro una notificación de bienvenida al ecommerce para el usuario loggeado
-loggedName = localStorage.getItem("loggedUser");
-loggedName = JSON.parse(loggedName).name;
-Toastify({
-    text: `Bienvenido, ${loggedName}!!`,
-    duration: 3000,
-    close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "left", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
-    style: {
-      background: "linear-gradient(to right,rgb(99, 209, 63),rgb(35, 198, 43))",
-    },
-  }).showToast();
 
-//Busco los productos a la API/BD (Simulado con archivo JSON)
-fetch("../db/products.json")
-.then(response => response.json())
-.then(data => {    
-productsDB = data;
-renderProducts(productsDB);
-})
-.catch(() => {
-    let productContainer = document.getElementById("product-container");
-    let errorMsj = document.createElement("h2");
-    errorMsj.innerText = "Ocurrió un problema, intente nuevamente";
-    errorMsj.style.color ="#8077e8";
-    productContainer.appendChild(errorMsj);
-    productContainer.style.justifyContent = "center";
-});
+
+//Para no permitir que se ingrese a esta pagina sin estar loggeado
+if(loggedUser != "null"){
+     //Muestro una notificación de bienvenida al ecommerce para el usuario loggeado
+     loggedUser = JSON.parse(loggedUser).name;
+     Toastify({
+         text: `Bienvenido, ${loggedUser}!!`,
+         duration: 3000,
+         close: true,
+         gravity: "top", // `top` or `bottom`
+         position: "left", // `left`, `center` or `right`
+         stopOnFocus: true, // Prevents dismissing of toast on hover
+         style: {
+         background: "linear-gradient(to right,rgb(99, 209, 63),rgb(35, 198, 43))",
+         },
+     }).showToast();
+ 
+     //Busco los productos a la API/BD (Simulado con archivo JSON)
+     fetch("../db/products.json")
+     .then(response => response.json())
+     .then(data => {    
+     productsDB = data;
+     renderProducts(productsDB);
+     })
+     .catch(() => {
+         //Al ser un fetch a un archivo, esto nunca debería ejecutarse pero si fuese alguna API podría ocurrir.
+         let productContainer = document.getElementById("product-container");
+         let errorMsj = document.createElement("h2");
+         errorMsj.innerText = "Ocurrió un problema, intente nuevamente";
+         errorMsj.style.color ="#8077e8";
+         productContainer.appendChild(errorMsj);
+         productContainer.style.justifyContent = "center";
+     });
+         
+     startEcommerce();
+
+
+
     
-startEcommerce();
+}
+else{
+    Swal.fire({
+        title: 'No has iniciado sesión',
+        text: 'Para comprar en el ecommerce debes iniciar sesión primero',
+        icon: 'warning',
+        confirmButtonText: 'Iniciar sesión',
+        showCancelButton:false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        preConfirm: () => {
+            //Se ejecuta al confirmar la alerta
+            window.location.href = "../index.html";
+        }
+    });
+   
+}
+
 
     
 
